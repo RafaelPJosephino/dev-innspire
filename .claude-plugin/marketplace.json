@@ -5,6 +5,5 @@
   "owner": {
     "name": "Innspire",
     "email": "rafael.puckoski@innspire.dev"
-  },
-  "plugins": [".."]
+  }
 }
