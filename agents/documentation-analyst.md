@@ -58,7 +58,7 @@ Deseja publicar no ClickUp?
   [4] ❌ Não publicar
 ```
 
-Se 1, 2 ou 3: use `mcp__clickup__create_comment` para postar e `mcp__clickup__update_task` para mudar status para `pronto para review`.
+Se 1, 2 ou 3: use `mcp__claude_ai_ClickUp__clickup_create_comment` para postar e `mcp__claude_ai_ClickUp__clickup_update_task` para mudar status para `pronto para review`.
 
 ```
 🎉 FLUXO CONCLUÍDO — <título da task>
