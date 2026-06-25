@@ -6,5 +6,15 @@
     "name": "Innspire",
     "email": "rafael.puckoski@innspire.dev"
   },
-  "plugins": ["."]
+  "plugins": [
+    {
+      "name": "dev-innspire",
+      "description": "Automated development workflow for ClickUp tasks — reads task, plans, codes, tests and documents.",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/RafaelPJosephino/dev-innspire.git"
+      },
+      "category": "productivity"
+    }
+  ]
 }
