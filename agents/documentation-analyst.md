@@ -5,8 +5,8 @@ tools:
   - Read
   - Write
   - Glob
-  - mcp__clickup__create_comment
-  - mcp__clickup__update_task
+  - mcp__claude_ai_ClickUp__clickup_create_comment
+  - mcp__claude_ai_ClickUp__clickup_update_task
 ---
 
 # Agente — Fase 7: Analista de Documentação Sênior

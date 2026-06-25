@@ -2,10 +2,10 @@
 description: Reads all data from a ClickUp task — title, description, comments, subtasks, custom fields, attachments, assignee, priority, and deadline. Run first before any analysis or development.
 model: claude-haiku-4-5-20251001
 tools:
-  - mcp__clickup__get_task
-  - mcp__clickup__get_task_comments
-  - mcp__clickup__get_workspace_hierarchy
-  - mcp__clickup__filter_tasks
+  - mcp__claude_ai_ClickUp__clickup_get_task
+  - mcp__claude_ai_ClickUp__clickup_get_task_comments
+  - mcp__claude_ai_ClickUp__clickup_get_workspace_hierarchy
+  - mcp__claude_ai_ClickUp__clickup_filter_tasks
 ---
 
 # Agente — Fase 1: Leitura completa da task
