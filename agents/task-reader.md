@@ -15,6 +15,30 @@ Recupera todas as informações da task no ClickUp antes de qualquer análise ou
 
 ## Instruções
 
+### Passo 1 — Verificar disponibilidade do MCP
+
+Antes de qualquer coisa, tente chamar `mcp__claude_ai_ClickUp__clickup_get_task` com o ID fornecido.
+
+**Se a chamada não for executada (tool_uses == 0) ou retornar erro de conexão:**
+
+```
+❌ ERRO: Ferramentas MCP do ClickUp não estão disponíveis.
+
+Não é possível continuar sem acesso real à task.
+Não invente nem assuma nenhum dado.
+
+Verifique:
+  1. Acesse Customize → Connectors no Claude Code
+  2. Confirme que o conector "ClickUp" está ativo e autenticado
+  3. Rode o comando novamente após reconectar
+
+O workflow foi encerrado.
+```
+
+Encerre imediatamente. Não passe dados para a Fase 2.
+
+### Passo 2 — Buscar todos os dados da task
+
 Use o MCP do ClickUp para buscar **tudo** da task informada:
 
 - Título e descrição completa
@@ -23,6 +47,8 @@ Use o MCP do ClickUp para buscar **tudo** da task informada:
 - Campos customizados preenchidos
 - Anexos referenciados
 - Responsável, prioridade, prazo
+
+### Passo 3 — Exibir resumo e validar
 
 Ao concluir, exiba o resumo:
 
@@ -37,5 +63,7 @@ Ao concluir, exiba o resumo:
    Subtasks: <N>
 ```
 
+**Se o título retornado estiver vazio ou o ID não corresponder à task solicitada**, emita erro e encerre — não prossiga.
+
 ## Saída esperada
-Objeto completo com todos os dados da task para ser passado ao próximo agente.
+Objeto completo com todos os dados reais da task para ser passado ao próximo agente. Nunca fabricar ou assumir dados não retornados pelo MCP.

@@ -10,17 +10,17 @@ Como usar o MCP do ClickUp no dev-agent — tools disponíveis, padrões de uso 
 
 | Tool | Uso |
 |---|---|
-| `mcp__clickup__get_task` | Busca título, descrição, status, prioridade, responsável, prazo e campos customizados |
-| `mcp__clickup__get_task_comments` | Busca todos os comentários em ordem cronológica |
-| `mcp__clickup__get_workspace_hierarchy` | Mapeia spaces, folders e lists para contexto |
-| `mcp__clickup__filter_tasks` | Lista subtasks relacionadas |
+| `mcp__claude_ai_ClickUp__clickup_get_task` | Busca título, descrição, status, prioridade, responsável, prazo e campos customizados |
+| `mcp__claude_ai_ClickUp__clickup_get_task_comments` | Busca todos os comentários em ordem cronológica |
+| `mcp__claude_ai_ClickUp__clickup_get_workspace_hierarchy` | Mapeia spaces, folders e lists para contexto |
+| `mcp__claude_ai_ClickUp__clickup_filter_tasks` | Lista subtasks relacionadas |
 
 ### Fase 7 — Publicação
 
 | Tool | Uso |
 |---|---|
-| `mcp__clickup__create_comment` | Posta documentação técnica e/ou QA como comentário |
-| `mcp__clickup__update_task` | Muda status para `pronto para review` |
+| `mcp__claude_ai_ClickUp__clickup_create_comment` | Posta documentação técnica e/ou QA como comentário |
+| `mcp__claude_ai_ClickUp__clickup_update_task` | Muda status para `pronto para review` |
 
 ---
 
@@ -29,7 +29,7 @@ Como usar o MCP do ClickUp no dev-agent — tools disponíveis, padrões de uso 
 ### Buscar task completa
 
 ```
-mcp__clickup__get_task(task_id: "<TASK_ID>")
+mcp__claude_ai_ClickUp__clickup_get_task(task_id: "<TASK_ID>")
 ```
 
 Retorna: `id`, `name`, `description`, `status`, `priority`, `assignees`, `due_date`, `custom_fields`, `list`, `folder`, `space`.
@@ -37,7 +37,7 @@ Retorna: `id`, `name`, `description`, `status`, `priority`, `assignees`, `due_da
 ### Buscar comentários
 
 ```
-mcp__clickup__get_task_comments(task_id: "<TASK_ID>")
+mcp__claude_ai_ClickUp__clickup_get_task_comments(task_id: "<TASK_ID>")
 ```
 
 Retorna array de comentários com `comment_text`, `user`, `date`. Sempre leia do mais antigo ao mais recente — comentários antigos têm contexto de decisões importantes.
@@ -45,7 +45,7 @@ Retorna array de comentários com `comment_text`, `user`, `date`. Sempre leia do
 ### Buscar subtasks
 
 ```
-mcp__clickup__filter_tasks(list_id: "<LIST_ID>", parent: "<TASK_ID>")
+mcp__claude_ai_ClickUp__clickup_filter_tasks(list_id: "<LIST_ID>", parent: "<TASK_ID>")
 ```
 
 ---
@@ -55,7 +55,7 @@ mcp__clickup__filter_tasks(list_id: "<LIST_ID>", parent: "<TASK_ID>")
 ### Postar documentação como comentário
 
 ```
-mcp__clickup__create_comment(
+mcp__claude_ai_ClickUp__clickup_create_comment(
   task_id: "<TASK_ID>",
   comment_text: "<conteúdo da documentação formatado em markdown>"
 )
@@ -75,7 +75,7 @@ mcp__clickup__create_comment(
 ### Mudar status
 
 ```
-mcp__clickup__update_task(
+mcp__claude_ai_ClickUp__clickup_update_task(
   task_id: "<TASK_ID>",
   status: "pronto para review"
 )
@@ -100,7 +100,7 @@ mcp__clickup__update_task(
 
 Antes de qualquer chamada MCP na Fase 1, verificar se o conector está ativo:
 
-1. Tentar `mcp__clickup__get_task` com o TASK_ID fornecido
+1. Tentar `mcp__claude_ai_ClickUp__clickup_get_task` com o TASK_ID fornecido
 2. Se retornar auth error → informar que o conector ClickUp precisa estar conectado em **Customize → Connectors**
 3. Nunca prosseguir sem dados reais da task
 

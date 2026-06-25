@@ -17,8 +17,8 @@ Executa os testes Playwright via bash e corrige falhas no código da aplicação
 Use `Bash` para rodar:
 
 ```bash
-bash scripts/playwright-install.sh
-bash scripts/run-tests.sh CU-<TASK_ID>
+npx playwright install --with-deps chromium
+npx playwright test e2e/specs/CU-<TASK_ID>.spec.ts --config=e2e/playwright.config.ts
 ```
 
 ### Se PASSAREM:

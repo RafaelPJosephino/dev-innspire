@@ -7,15 +7,28 @@ Padrões obrigatórios, estrutura de arquivos e boas práticas para os testes E2
 ## Estrutura do Arquivo de Testes
 
 ```typescript
-// tests/e2e/CU-<TASK_ID>.spec.ts
+// e2e/specs/CU-<TASK_ID>.spec.ts
 
 import { test, expect } from '@playwright/test';
+
+// Helper de autenticação — sempre investigar o mecanismo real da app antes de usar
+async function authenticate(page) {
+  // Exemplo para app que usa localStorage:
+  await page.goto('/');
+  await page.evaluate(() => {
+    localStorage.setItem('infoLogin', JSON.stringify({
+      token: 'token-de-teste',
+      // demais campos exigidos pela app — verificar login.service.ts
+    }));
+  });
+}
 
 test.describe('<Critério de Aceite Principal>', () => {
 
   test.beforeEach(async ({ page }) => {
-    // Setup comum: login, navegação inicial
-    await page.goto('/');
+    // Sempre autenticar antes de navegar para a feature
+    await authenticate(page);
+    await page.goto('/rota-da-feature'); // confirmar rota no routing.module
   });
 
   // Happy path
@@ -147,26 +160,62 @@ test('deve exibir mensagem de erro quando API falhar', async ({ page }) => {
 
 ---
 
+## Estrutura centralizada de arquivos E2E
+
+Sempre usar a estrutura abaixo — criar se não existir:
+
+```
+<raiz do frontend>/
+└── e2e/
+    ├── playwright.config.ts       ← config centralizada
+    ├── specs/
+    │   └── CU-<ID>.spec.ts        ← um arquivo por task
+    ├── fixtures/
+    │   └── auth.ts                ← helper de autenticação reutilizável
+    ├── screenshots/               ← saída de screenshots
+    ├── test-results/              ← saída do runner
+    └── playwright-report/        ← relatório HTML
+```
+
+## Setup inicial — verificar antes de criar config
+
+1. Procure por `playwright.config.ts` ou `playwright.config.js` no projeto (`Glob`)
+2. Se já existir: respeite a configuração existente e adapte os caminhos
+3. Se não existir: crie `e2e/playwright.config.ts` com o template abaixo
+
+```typescript
+// e2e/playwright.config.ts
+import { defineConfig } from '@playwright/test';
+
+export default defineConfig({
+  testDir: './specs',
+  outputDir: './test-results',
+  reporter: [['html', { outputFolder: './playwright-report', open: 'never' }]],
+  use: {
+    baseURL: process.env['BASE_URL'] || 'http://localhost:4200',
+    screenshot: 'only-on-failure',
+    trace: 'on-first-retry',
+  },
+  workers: 1,
+  timeout: 30000,
+});
+```
+
 ## Scripts de Execução
 
 ```bash
-# Instalar (idempotente)
-bash scripts/playwright-install.sh
+# Instalar Playwright (se não instalado)
+npx playwright install --with-deps chromium
 
 # Executar testes de uma task
-bash scripts/run-tests.sh CU-<TASK_ID>
+npx playwright test e2e/specs/CU-<TASK_ID>.spec.ts --config=e2e/playwright.config.ts
 
 # Variáveis de ambiente
-BASE_URL=http://localhost:3000  # URL da aplicação
+BASE_URL=http://localhost:4200  # URL da aplicação
 ```
 
-**Configuração:** `playwright.config.ts` na raiz do projeto.
-- `testDir`: `./tests/e2e`
-- `timeout`: 30s
-- `workers`: 1 (sequencial para evitar conflitos de estado)
-- `browser`: Chromium headless
-- `screenshot`: `only-on-failure`
-- `trace`: `on-first-retry`
+> Os scripts `scripts/playwright-install.sh` e `scripts/run-tests.sh` não existem no repositório.
+> Use os comandos `npx` acima diretamente.
 
 ---
 

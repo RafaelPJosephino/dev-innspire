@@ -33,6 +33,13 @@ Referência completa das 8 fases do dev-agent e como os agentes se encadeiam.
 
 Recupera tudo antes de qualquer análise. Sem contexto completo, as fases seguintes são inúteis.
 
+**Validação obrigatória antes de prosseguir:**
+- O MCP foi chamado de verdade (`tool_uses > 0`)
+- O título retornado não está vazio
+- O ID retornado corresponde ao ID solicitado
+
+Se qualquer validação falhar: encerrar com erro — nunca fabricar dados.
+
 **O que buscar:**
 - Título e descrição completa
 - Comentários do mais antigo ao mais recente (contexto de decisões)
@@ -41,7 +48,8 @@ Recupera tudo antes de qualquer análise. Sem contexto completo, as fases seguin
 - Responsável, prioridade e prazo
 
 **Saída esperada:**
-```
+
+```text
 📋 TASK LIDA: <título>
    ID: <id> | Status: <status> | Prioridade: <prioridade>
    Responsável: <nome> | Prazo: <data ou "não definido">
@@ -110,6 +118,41 @@ Desenvolvedor Sênior — implementa exatamente o plano aprovado.
 
 ---
 
+## Fase 4b — Verificação visual local (obrigatória)
+
+**Responsável:** Orquestrador (não há agente dedicado)
+**Quando:** Imediatamente após build OK na Fase 4, antes de qualquer teste
+
+Após o build passar, exibir ao usuário:
+
+```text
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Fase 4 concluída — build OK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Antes de seguir para os testes, valide a implementação localmente:
+
+1. Suba o app:
+   ng serve --configuration=development   (Angular)
+   npm run dev                            (Next.js / outros)
+
+2. Acesse a rota da funcionalidade implementada
+
+3. Verifique manualmente os critérios de aceite:
+   [ ] <critério 1 da task>
+   [ ] <critério 2 da task>
+
+Confirme para prosseguir:
+  [1] ✅ Validado — seguir para Fase 5 (test-planner)
+  [2] ⚠️  Encontrei um problema — descreva para corrigir
+```
+
+Aguardar resposta explícita. Se [2]: corrigir e repetir esta fase.
+
+**Propósito:** Garantir que falhas nos testes automatizados sejam de lógica — não de ambiente ou renderização.
+
+---
+
 ## Fase 5 — Testes Playwright
 
 **Modelo:** Sonnet
@@ -136,17 +179,36 @@ Analista de Testes Sênior — gera `tests/e2e/CU-<TASK_ID>.spec.ts`.
 **Modelo:** Haiku (execução mecânica)
 **Tools:** Bash, Read, Edit
 
-Executa via scripts locais — nunca pede ao usuário para testar manualmente.
+Executa testes localmente via `npx` — nunca pede ao usuário para testar manualmente.
+
+**Pré-requisito obrigatório:** Antes de lançar o test-runner, exibir:
+
+```text
+⚠️  PRÉ-REQUISITO — Fase 6 (testes E2E)
+O dev server precisa estar rodando localmente.
+
+  Angular:  ng serve --configuration=development
+  Next.js:  npm run dev
+
+Confirme quando o app estiver no ar:
+  [1] ✅ App rodando — iniciar testes
+  [2] ❌ Cancelar
+```
+
+Aguardar confirmação explícita antes de executar.
+
+**Comandos de execução:**
 
 ```bash
-bash scripts/playwright-install.sh
-bash scripts/run-tests.sh CU-<TASK_ID>
+npx playwright install --with-deps chromium
+npx playwright test e2e/specs/CU-<TASK_ID>.spec.ts --config=e2e/playwright.config.ts
 ```
 
 **Política de falha:**
 - Máximo 2 tentativas de correção automática
 - Corrige o código da aplicação — nunca o teste
-- Após 2 falhas: bloqueia com diagnóstico detalhado
+- Falha por ambiente (app não rodando, porta errada) → informar usuário, não tentar corrigir código
+- Após 2 falhas de código: bloqueia com diagnóstico detalhado
 
 ---
 
