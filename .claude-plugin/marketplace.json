@@ -1,0 +1,10 @@
+{
+  "name": "dev-innspire",
+  "version": "3.0.0",
+  "description": "Automated development workflow for ClickUp tasks — reads task, plans, codes, tests and documents.",
+  "owner": {
+    "name": "Innspire",
+    "email": "rafael.puckoski@innspire.dev"
+  },
+  "plugins": ["."]
+}
