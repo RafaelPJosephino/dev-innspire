@@ -1,0 +1,23 @@
+{
+  "name": "dev-innspire",
+  "version": "3.0.0",
+  "description": "Automated development workflow for ClickUp tasks — reads task, plans, codes, tests and documents.",
+  "author": "",
+  "context": "CLAUDE.md",
+  "connectors": [
+    {
+      "name": "ClickUp",
+      "url": "https://mcp.clickup.com/mcp",
+      "type": "url"
+    }
+  ],
+  "agents": ["agents"],
+  "skills": ["skills"],
+  "env": {
+    "BASE_URL": {
+      "description": "Base URL of the application used during Playwright tests",
+      "default": "http://localhost:3000",
+      "required": false
+    }
+  }
+}
