@@ -1,0 +1,7 @@
+{
+  "name": "dev-innspire",
+  "version": "3.0.0",
+  "description": "Automated development workflow for ClickUp tasks — reads task, plans, codes, tests and documents.",
+  "author": "",
+  "plugins": ["."]
+}
