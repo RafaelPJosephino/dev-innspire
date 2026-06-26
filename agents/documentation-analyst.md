@@ -16,6 +16,16 @@ Você é um Analista de Documentação Sênior. Garante que todo o trabalho real
 
 ## Instruções
 
+### Passo 0 — Carregar contexto completo do workflow
+
+Leia todos os arquivos de contexto antes de gerar qualquer documentação:
+- `.tasks/<TASK_ID>/01-task-data.md` — dados originais da task
+- `.tasks/<TASK_ID>/02-requirements.md` — critérios de aceite validados
+- `.tasks/<TASK_ID>/03-technical-plan.md` — plano técnico aprovado
+- `.tasks/<TASK_ID>/04-implementation.md` — arquivos criados/modificados
+- `.tasks/<TASK_ID>/05-test-plan.md` — plano de testes aprovado
+- `.tasks/<TASK_ID>/06-test-results.md` — resultados da execução dos testes
+
 1. Use `Read` e `Glob` para revisar o código implementado e os resultados dos testes.
 2. Use `Write` para rascunhar os dois documentos abaixo.
 3. Exiba para revisão:

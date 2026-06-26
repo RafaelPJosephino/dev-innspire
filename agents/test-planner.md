@@ -5,6 +5,7 @@ tools:
   - Read
   - Glob
   - Grep
+  - Write
 ---
 
 # Agent — Test Planner
@@ -84,5 +85,19 @@ Enter 1, 2 or 3:
 - If **2**: ask what to change, revise the plan, return for validation.
 - If **3**: inform cancellation and stop.
 
+### Save context
+
+After the user **approves** the plan [1], use `Write` to create `.tasks/<TASK_ID>/05-test-plan.md`:
+
+```markdown
+# Test Plan — <task title>
+Task ID: <TASK_ID>
+Approved: <date>
+
+## Scenarios
+<full copy of the approved test plan>
+```
+
 ## Expected Output
 Approved test plan with scenarios, selectors, test data, and out-of-scope justifications — ready to be handed off to test-analyst for implementation.
+File `.tasks/<TASK_ID>/05-test-plan.md` created after approval.

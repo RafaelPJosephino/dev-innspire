@@ -44,6 +44,24 @@ Leia os arquivos de referência antes de executar cada fase:
 - `references/playwright-reference.md` — padrões de teste, seletores, assertions e cobertura
 - `references/coding-standards.md` — convenções de código, verificação de build e escopo
 
+## Inicialização — criar pasta de contexto da task
+
+**Antes de invocar qualquer agente**, execute os seguintes passos no terminal:
+
+```bash
+mkdir -p .tasks/<TASK_ID>
+```
+
+Em seguida, crie o arquivo `.tasks/<TASK_ID>/.gitignore` com o conteúdo:
+
+```
+*
+```
+
+Isso garante que toda a pasta `.tasks/` fique ignorada pelo git mas visível localmente para debug entre fases.
+
+Confirme a criação antes de invocar o task-reader.
+
 ## Validações entre fases
 
 **Fase 1 → Fase 2:**

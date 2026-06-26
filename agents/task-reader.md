@@ -6,6 +6,7 @@ tools:
   - mcp__claude_ai_ClickUp__clickup_get_task_comments
   - mcp__claude_ai_ClickUp__clickup_get_workspace_hierarchy
   - mcp__claude_ai_ClickUp__clickup_filter_tasks
+  - Write
 ---
 
 # Agente — Fase 1: Leitura completa da task
@@ -65,5 +66,33 @@ Ao concluir, exiba o resumo:
 
 **Se o título retornado estiver vazio ou o ID não corresponder à task solicitada**, emita erro e encerre — não prossiga.
 
+### Passo 4 — Salvar contexto
+
+Após exibir o resumo com sucesso, use `Write` para criar `.tasks/<TASK_ID>/01-task-data.md`:
+
+```markdown
+# Task Data — <título>
+Task ID: <TASK_ID>
+Status: <status>
+Prioridade: <prioridade>
+Responsável: <nome>
+Prazo: <data ou "não definido">
+Comentários: <N>
+Subtasks: <N>
+
+## Descrição completa
+<descrição>
+
+## Comentários (mais antigo → mais recente)
+<comentários>
+
+## Subtasks
+<lista com status de cada subtask>
+
+## Campos customizados
+<campos preenchidos>
+```
+
 ## Saída esperada
-Objeto completo com todos os dados reais da task para ser passado ao próximo agente. Nunca fabricar ou assumir dados não retornados pelo MCP.
+Todos os dados reais da task passados ao próximo agente. Nunca fabricar dados.
+Arquivo `.tasks/<TASK_ID>/01-task-data.md` criado.

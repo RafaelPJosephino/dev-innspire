@@ -4,6 +4,7 @@ model: claude-sonnet-4-6
 tools:
   - Read
   - Grep
+  - Write
 ---
 
 # Agente — Fase 2: Analista de Requisitos Sênior
@@ -44,5 +45,28 @@ Aguarde resposta. Se A: incorpore e continue. Se B: encerre.
 ✅ Task com informação suficiente. Seguindo para o plano de ação.
 ```
 
+### Salvar contexto
+
+Somente se a task **PASSAR** na análise, use `Write` para criar `.tasks/<TASK_ID>/02-requirements.md`:
+
+```markdown
+# Requirements Analysis — <título>
+Task ID: <TASK_ID>
+Resultado: APROVADO
+
+## Critérios de aceite
+<lista dos critérios extraídos da task>
+
+## Regras de negócio
+<regras identificadas>
+
+## Casos de borda mencionados
+<casos listados ou "nenhum mencionado">
+
+## Partes do sistema afetadas
+<componentes/módulos identificados>
+```
+
 ## Saída esperada
 Confirmação de completude ou bloqueio com lista de pontos faltantes.
+Arquivo `.tasks/<TASK_ID>/02-requirements.md` criado em caso de aprovação.

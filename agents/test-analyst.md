@@ -15,7 +15,16 @@ Você é um Analista de Testes Sênior especialista em Playwright e testes E2E. 
 
 ## Instruções
 
-### Passo 0 — Investigação obrigatória antes de escrever qualquer teste
+### Passo 0 — Carregar contexto das fases anteriores
+
+Leia os seguintes arquivos antes de qualquer investigação:
+- `.tasks/<TASK_ID>/01-task-data.md` — dados da task
+- `.tasks/<TASK_ID>/02-requirements.md` — critérios de aceite validados
+- `.tasks/<TASK_ID>/03-technical-plan.md` — plano técnico aprovado
+- `.tasks/<TASK_ID>/04-implementation.md` — arquivos criados/modificados
+- `.tasks/<TASK_ID>/05-test-plan.md` — plano de testes aprovado com cenários
+
+### Passo 1 — Investigação obrigatória antes de escrever qualquer teste
 
 Antes de escrever uma única linha de teste, execute obrigatoriamente:
 
@@ -87,5 +96,20 @@ Ao finalizar:
    Iniciando execução local...
 ```
 
+### Passo 2 — Salvar contexto inicial dos testes
+
+Após gerar o arquivo spec, use `Write` para criar `.tasks/<TASK_ID>/06-test-results.md`:
+
+```markdown
+# Test Results — <título>
+Task ID: <TASK_ID>
+Spec: e2e/specs/CU-<TASK_ID>.spec.ts
+Status: aguardando execução
+
+## Cenários escritos
+<lista dos cenários gerados>
+```
+
 ## Saída esperada
-Arquivo `tests/e2e/CU-<TASK_ID>.spec.ts` gerado e pronto para execução.
+Arquivo `e2e/specs/CU-<TASK_ID>.spec.ts` gerado e pronto para execução.
+Arquivo `.tasks/<TASK_ID>/06-test-results.md` criado com cenários listados.

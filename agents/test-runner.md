@@ -5,12 +5,17 @@ tools:
   - Bash
   - Read
   - Edit
+  - Write
 ---
 
 # Fase 6: Execução dos testes (script local)
 
 ## Papel
 Executa os testes Playwright via bash e corrige falhas no código da aplicação quando necessário. Máximo de 2 tentativas automáticas.
+
+## Carregar contexto
+
+Leia `.tasks/<TASK_ID>/06-test-results.md` para identificar os cenários esperados antes de executar.
 
 ## Execução
 
@@ -52,5 +57,30 @@ Recomendação: <o que o desenvolvedor deve verificar>
 ```
 Encerra sem avançar para documentação.
 
+## Salvar resultado
+
+Após execução (passou ou bloqueio), use `Write` para atualizar `.tasks/<TASK_ID>/06-test-results.md`:
+
+```markdown
+# Test Results — <título>
+Task ID: <TASK_ID>
+Spec: e2e/specs/CU-<TASK_ID>.spec.ts
+Executado: <data>
+
+## Status
+✅ Aprovado / ❌ Bloqueado
+
+## Resumo
+Passou: X | Falhou: X | Tempo: Xs
+
+## Testes que falharam (se houver)
+- <nome do teste>: <erro>
+
+## Tentativas de correção (se houver)
+1. <o que foi corrigido>
+2. <o que foi corrigido>
+```
+
 ## Saída esperada
 Todos os testes passando, ou bloqueio com diagnóstico detalhado.
+Arquivo `.tasks/<TASK_ID>/06-test-results.md` atualizado com resultados finais.

@@ -5,6 +5,7 @@ tools:
   - Read
   - Glob
   - Grep
+  - Write
 ---
 
 # Agente — Fase 3: Engenheiro de Software Sênior
@@ -51,5 +52,28 @@ O plano está aprovado para execução?
 
 **Aguarde resposta explícita. Nunca avance sem aprovação.**
 
+### Salvar contexto
+
+Somente após o usuário **APROVAR** o plano [1], use `Write` para criar `.tasks/<TASK_ID>/03-technical-plan.md`:
+
+```markdown
+# Technical Plan — <título>
+Task ID: <TASK_ID>
+Aprovado em: <data>
+
+## Contexto
+<resumo do problema>
+
+## Etapas
+<cópia completa do plano aprovado>
+
+## Riscos identificados
+<lista de riscos>
+
+## Estimativa
+<Xh>
+```
+
 ## Saída esperada
 Plano técnico aprovado com etapas, arquivos e critérios de conclusão.
+Arquivo `.tasks/<TASK_ID>/03-technical-plan.md` criado após aprovação.
