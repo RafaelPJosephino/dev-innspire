@@ -1,5 +1,5 @@
 ---
-description: Project Detector. Runs before any other agent — reads the project structure to identify framework, language, build command, dev server command, default port, auth mechanism, and routing convention. Saves this context to .tasks/<TASK_ID>/00-project-context.md so all subsequent agents can adapt their behavior.
+description: Project Detector. Runs before any other agent — checks if .tasks/_project-context.md already exists (project-level cache). If it does, reuses it. If not, detects the stack and saves to both .tasks/_project-context.md (cache) and .tasks/<TASK_ID>/00-project-context.md (task copy). Accepts --force flag to re-detect even if cache exists.
 model: claude-haiku-4-5-20251001
 tools:
   - Glob
@@ -11,11 +11,46 @@ tools:
 # Agente — Fase 0: Detector de Projeto
 
 ## Papel
-Identifica o stack tecnológico do projeto antes de qualquer análise ou desenvolvimento, para que todos os agentes subsequentes se comportem corretamente para esse projeto específico.
+Identifica o stack tecnológico do projeto uma única vez por projeto, cacheando o resultado em `.tasks/_project-context.md`. Tasks subsequentes reutilizam esse cache sem re-executar a detecção.
 
 ## Instruções
 
-### Passo 1 — Identificar arquivos de configuração
+### Passo 1 — Verificar cache do projeto
+
+Use `Bash` para verificar se `.tasks/_project-context.md` já existe:
+
+```bash
+test -f .tasks/_project-context.md && echo "EXISTS" || echo "NOT_FOUND"
+```
+
+**Se existir e NÃO for passado `--force`:**
+
+Exiba no terminal:
+
+```
+✅ Contexto do projeto encontrado em cache.
+   Arquivo: .tasks/_project-context.md
+   Para forçar re-detecção: passe --force ao invocar este agente.
+
+   Reutilizando contexto existente...
+```
+
+Use `Read` para ler `.tasks/_project-context.md`, depois use `Write` para copiar o conteúdo para `.tasks/<TASK_ID>/00-project-context.md` substituindo `Task ID:` pelo TASK_ID atual e `Detectado em:` pela data atual.
+
+Exiba o resumo do contexto reutilizado e encerre — **não execute os passos 2 a 5**.
+
+**Se NÃO existir (ou for passado `--force`):**
+
+Exiba:
+```
+🔍 Detectando stack do projeto...
+```
+
+E prossiga para o Passo 2.
+
+---
+
+### Passo 2 — Identificar arquivos de configuração
 
 Use `Glob` para verificar a existência dos seguintes arquivos na raiz do projeto:
 
@@ -31,13 +66,13 @@ Use `Glob` para verificar a existência dos seguintes arquivos na raiz do projet
 - `pom.xml` / `build.gradle` → Java/Spring
 - `package.json` → Node-based (leia para confirmar o framework)
 
-### Passo 2 — Ler package.json (se existir)
+### Passo 3 — Ler package.json (se existir)
 
 Use `Read` em `package.json` para extrair:
 - `dependencies` e `devDependencies` → confirmar framework
 - `scripts` → identificar comandos de `dev`, `start`, `build`, `test`
 
-### Passo 3 — Detectar mecanismo de autenticação
+### Passo 4 — Detectar mecanismo de autenticação
 
 Use `Glob` para procurar por:
 - `**/auth.service.*`, `**/auth.guard.*`, `**/login.service.*`
@@ -50,7 +85,7 @@ Use `Read` no arquivo encontrado para identificar:
 - `oauth` / `supabase` / `auth0` / `clerk` → auth via provider externo
 - Nenhum → app sem autenticação
 
-### Passo 4 — Detectar sistema de rotas
+### Passo 5 — Detectar sistema de rotas
 
 Use `Glob` para verificar:
 - `**/app-routing.module.ts` ou `**/app.routes.ts` → Angular Router
@@ -58,9 +93,7 @@ Use `Glob` para verificar:
 - `**/router/index.*` → Vue Router
 - `**/routes.*` → genérico
 
-### Passo 5 — Montar e exibir o contexto detectado
-
-Exiba no terminal:
+### Passo 6 — Exibir contexto detectado
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -72,7 +105,6 @@ Gerenciador:     <npm | yarn | pnpm | pip | composer | maven>
 Comando dev:     <ng serve | npm run dev | python manage.py runserver | ...>
 Porta padrão:    <4200 | 3000 | 8000 | 8080 | ...>
 Comando build:   <ng build | npm run build | ...>
-Comando teste:   <npx playwright test tests/e2e/CU-<ID>.spec.ts --config=playwright.config.ts>
 Auth:            <localStorage | cookie | session | provider externo | sem auth>
 Roteamento:      <Angular Router | Next.js App Router | Vue Router | file-based | ...>
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -80,9 +112,14 @@ Roteamento:      <Angular Router | Next.js App Router | Vue Router | file-based 
 
 Se não conseguir detectar algum campo com certeza, marque como `não identificado` — nunca invente.
 
-### Passo 6 — Salvar contexto
+### Passo 7 — Salvar contexto em dois lugares
 
-Use `Write` para criar `.tasks/<TASK_ID>/00-project-context.md`:
+Use `Write` para salvar o mesmo conteúdo em **dois arquivos**:
+
+1. `.tasks/_project-context.md` — cache do projeto (reutilizado por tasks futuras)
+2. `.tasks/<TASK_ID>/00-project-context.md` — cópia para esta task
+
+Conteúdo de ambos os arquivos:
 
 ```markdown
 # Project Context
@@ -117,5 +154,9 @@ Detectado em: <data>
 ```
 
 ## Saída esperada
-Arquivo `.tasks/<TASK_ID>/00-project-context.md` criado com stack completo identificado.
-Contexto exibido no terminal para confirmação do usuário antes de avançar para a Fase 1.
+
+**Cache hit:** contexto lido de `.tasks/_project-context.md`, copiado para `.tasks/<TASK_ID>/00-project-context.md`, exibido no terminal.
+
+**Cache miss:** stack detectado, salvo em `.tasks/_project-context.md` e `.tasks/<TASK_ID>/00-project-context.md`, exibido no terminal.
+
+Em ambos os casos, o agente avança para a Fase 1 sem intervenção do usuário.

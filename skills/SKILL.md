@@ -54,15 +54,23 @@ Leia os arquivos de referência antes de executar cada fase:
 mkdir -p .tasks/<TASK_ID>
 ```
 
-Em seguida crie `.tasks/<TASK_ID>/.gitignore` com o conteúdo:
+Em seguida crie dois arquivos `.gitignore`:
 
+**`.tasks/.gitignore`** — ignora tudo exceto o cache do projeto:
+```
+*
+!.gitignore
+!_project-context.md
+```
+
+**`.tasks/<TASK_ID>/.gitignore`** — ignora tudo dentro da pasta da task:
 ```
 *
 ```
 
-Depois invoque o agente **project-detector** passando o TASK_ID. Ele detecta o stack e salva `.tasks/<TASK_ID>/00-project-context.md`.
+Depois invoque o agente **project-detector** passando o TASK_ID. Se `.tasks/_project-context.md` já existir, ele reutiliza o cache. Senão, detecta o stack e salva em ambos os lugares.
 
-Todos os agentes subsequentes devem ler esse arquivo para usar os comandos, porta e padrões corretos do projeto.
+Todos os agentes subsequentes devem ler `.tasks/<TASK_ID>/00-project-context.md` para usar os comandos, porta e padrões corretos do projeto.
 
 ## Validações entre fases
 
