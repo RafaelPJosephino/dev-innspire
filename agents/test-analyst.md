@@ -44,7 +44,7 @@ Antes de escrever uma única linha de teste, execute obrigatoriamente:
 
 **4. Verificar se já existe `playwright.config.ts`:**
 - Procure por `playwright.config.ts` ou `playwright.config.js` no projeto
-- Se não existir, crie na estrutura centralizada `e2e/playwright.config.ts` (veja referência)
+- Se não existir, crie na raiz do projeto como `playwright.config.ts` (veja referência)
 - Se já existir, respeite a configuração existente
 
 **5. Solicitar credenciais de autenticação (se necessário):**
@@ -74,7 +74,7 @@ Somente após concluir essa investigação (e receber credenciais se necessário
 
 1. Use `Read` e `Glob` para revisar o código implementado na Fase 4.
 2. Use `Grep` para identificar seletores e fluxos existentes.
-3. Use `Write` para gerar: `e2e/specs/CU-<TASK_ID>.spec.ts`
+3. Use `Write` para gerar: `tests/e2e/CU-<TASK_ID>.spec.ts`
 
 **Cobertura obrigatória:**
 - Happy path de cada critério de aceite
@@ -92,6 +92,7 @@ Somente após concluir essa investigação (e receber credenciais se necessário
 Ao finalizar:
 ```
 🧪 Script de testes gerado: tests/e2e/CU-<TASK_ID>.spec.ts
+
    Cobertura: <N> cenários
    Iniciando execução local...
 ```
@@ -103,7 +104,7 @@ Após gerar o arquivo spec, use `Write` para criar `.tasks/<TASK_ID>/06-test-res
 ```markdown
 # Test Results — <título>
 Task ID: <TASK_ID>
-Spec: e2e/specs/CU-<TASK_ID>.spec.ts
+Spec: tests/e2e/CU-<TASK_ID>.spec.ts
 Status: aguardando execução
 
 ## Cenários escritos
@@ -111,5 +112,5 @@ Status: aguardando execução
 ```
 
 ## Saída esperada
-Arquivo `e2e/specs/CU-<TASK_ID>.spec.ts` gerado e pronto para execução.
+Arquivo `tests/e2e/CU-<TASK_ID>.spec.ts` gerado e pronto para execução.
 Arquivo `.tasks/<TASK_ID>/06-test-results.md` criado com cenários listados.

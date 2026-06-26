@@ -28,7 +28,7 @@ Executa o workflow completo de desenvolvimento para uma task do ClickUp, orquest
          ↓
 [Fase 5] test-planner         → sonnet — define test plan; aguarda aprovação
          ↓
-[Fase 6] test-analyst         → sonnet — escreve e2e/specs/CU-<ID>.spec.ts
+[Fase 6] test-analyst         → sonnet — escreve tests/e2e/CU-<ID>.spec.ts
          ↓
 [Fase 7] test-runner      → haiku  — executa testes via bash (máx. 2 tentativas)
          ↓

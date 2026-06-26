@@ -7,7 +7,7 @@ Padrões obrigatórios, estrutura de arquivos e boas práticas para os testes E2
 ## Estrutura do Arquivo de Testes
 
 ```typescript
-// e2e/specs/CU-<TASK_ID>.spec.ts
+// tests/e2e/CU-<TASK_ID>.spec.ts
 
 import { test, expect } from '@playwright/test';
 
@@ -165,39 +165,40 @@ test('deve exibir mensagem de erro quando API falhar', async ({ page }) => {
 Sempre usar a estrutura abaixo — criar se não existir:
 
 ```
-<raiz do frontend>/
-└── e2e/
-    ├── playwright.config.ts       ← config centralizada
-    ├── specs/
-    │   └── CU-<ID>.spec.ts        ← um arquivo por task
-    ├── fixtures/
-    │   └── auth.ts                ← helper de autenticação reutilizável
-    ├── screenshots/               ← saída de screenshots
-    ├── test-results/              ← saída do runner
-    └── playwright-report/        ← relatório HTML
+<raiz do projeto>/
+├── playwright.config.ts           ← config na raiz do projeto
+├── tests/
+│   └── e2e/
+│       └── CU-<ID>.spec.ts        ← um arquivo por task
+└── playwright-report/             ← relatório HTML gerado pelo runner
 ```
 
 ## Setup inicial — verificar antes de criar config
 
-1. Procure por `playwright.config.ts` ou `playwright.config.js` no projeto (`Glob`)
+1. Procure por `playwright.config.ts` ou `playwright.config.js` na raiz do projeto (`Glob`)
 2. Se já existir: respeite a configuração existente e adapte os caminhos
-3. Se não existir: crie `e2e/playwright.config.ts` com o template abaixo
+3. Se não existir: crie `playwright.config.ts` na raiz com o template abaixo
 
 ```typescript
-// e2e/playwright.config.ts
-import { defineConfig } from '@playwright/test';
+// playwright.config.ts
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  testDir: './specs',
-  outputDir: './test-results',
-  reporter: [['html', { outputFolder: './playwright-report', open: 'never' }]],
-  use: {
-    baseURL: process.env['BASE_URL'] || 'http://localhost:4200',
-    screenshot: 'only-on-failure',
-    trace: 'on-first-retry',
-  },
+  testDir: './tests/e2e',
+  timeout: 30_000,
+  retries: 0,
   workers: 1,
-  timeout: 30000,
+  reporter: [
+    ['list'],
+    ['html', { outputFolder: 'playwright-report', open: 'never' }]
+  ],
+  use: {
+    baseURL: process.env.BASE_URL ?? 'http://localhost:3000',
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+    headless: true
+  },
+  projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }]
 });
 ```
 
@@ -208,7 +209,7 @@ export default defineConfig({
 npx playwright install --with-deps chromium
 
 # Executar testes de uma task
-npx playwright test e2e/specs/CU-<TASK_ID>.spec.ts --config=e2e/playwright.config.ts
+npx playwright test tests/e2e/CU-<TASK_ID>.spec.ts --config=playwright.config.ts
 
 # Variáveis de ambiente
 BASE_URL=http://localhost:4200  # URL da aplicação

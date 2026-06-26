@@ -201,7 +201,7 @@ Aguardar confirmação explícita antes de executar.
 
 ```bash
 npx playwright install --with-deps chromium
-npx playwright test e2e/specs/CU-<TASK_ID>.spec.ts --config=e2e/playwright.config.ts
+npx playwright test tests/e2e/CU-<TASK_ID>.spec.ts --config=playwright.config.ts
 ```
 
 **Política de falha:**

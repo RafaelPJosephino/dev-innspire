@@ -23,7 +23,7 @@ Use `Bash` para rodar:
 
 ```bash
 npx playwright install --with-deps chromium
-npx playwright test e2e/specs/CU-<TASK_ID>.spec.ts --config=e2e/playwright.config.ts
+npx playwright test tests/e2e/CU-<TASK_ID>.spec.ts --config=playwright.config.ts
 ```
 
 ### Se PASSAREM:
@@ -64,7 +64,7 @@ Após execução (passou ou bloqueio), use `Write` para atualizar `.tasks/<TASK_
 ```markdown
 # Test Results — <título>
 Task ID: <TASK_ID>
-Spec: e2e/specs/CU-<TASK_ID>.spec.ts
+Spec: tests/e2e/CU-<TASK_ID>.spec.ts
 Executado: <data>
 
 ## Status

@@ -26,7 +26,7 @@ You are a Senior Test Planner with deep expertise in E2E testing strategy. Your 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 SCOPE
-  File: e2e/specs/CU-<TASK_ID>.spec.ts
+  File: tests/e2e/CU-<TASK_ID>.spec.ts
   Total scenarios: <N>
 
 SCENARIOS:
