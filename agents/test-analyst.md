@@ -18,6 +18,7 @@ Você é um Analista de Testes Sênior especialista em Playwright e testes E2E. 
 ### Passo 0 — Carregar contexto das fases anteriores
 
 Leia os seguintes arquivos antes de qualquer investigação:
+- `.tasks/<TASK_ID>/00-project-context.md` — stack, mecanismo de auth, sistema de rotas, base URL
 - `.tasks/<TASK_ID>/01-task-data.md` — dados da task
 - `.tasks/<TASK_ID>/02-requirements.md` — critérios de aceite validados
 - `.tasks/<TASK_ID>/03-technical-plan.md` — plano técnico aprovado

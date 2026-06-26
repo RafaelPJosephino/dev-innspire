@@ -19,6 +19,7 @@ Você é um Analista de Documentação Sênior. Garante que todo o trabalho real
 ### Passo 0 — Carregar contexto completo do workflow
 
 Leia todos os arquivos de contexto antes de gerar qualquer documentação:
+- `.tasks/<TASK_ID>/00-project-context.md` — stack e ambiente do projeto
 - `.tasks/<TASK_ID>/01-task-data.md` — dados originais da task
 - `.tasks/<TASK_ID>/02-requirements.md` — critérios de aceite validados
 - `.tasks/<TASK_ID>/03-technical-plan.md` — plano técnico aprovado

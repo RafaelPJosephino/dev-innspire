@@ -15,7 +15,9 @@ Executa os testes Playwright via bash e corrige falhas no código da aplicação
 
 ## Carregar contexto
 
-Leia `.tasks/<TASK_ID>/06-test-results.md` para identificar os cenários esperados antes de executar.
+Leia antes de executar:
+- `.tasks/<TASK_ID>/00-project-context.md` — comando de dev server e base URL do projeto
+- `.tasks/<TASK_ID>/06-test-results.md` — cenários esperados
 
 ## Execução
 

@@ -16,6 +16,8 @@ Executa o workflow completo de desenvolvimento para uma task do ClickUp, orquest
 ## Fluxo
 
 ```
+[Fase 0] project-detector     → haiku  — detecta stack, porta, auth, rotas; salva 00-project-context.md
+         ↓
 [Fase 1] task-reader              → haiku  — recupera todos os dados da task
          ↓ (BLOQUEIA se MCP indisponível ou título vazio)
 [Fase 2] requirements-analyst  → sonnet — valida completude; bloqueia se faltar info
@@ -44,23 +46,23 @@ Leia os arquivos de referência antes de executar cada fase:
 - `references/playwright-reference.md` — padrões de teste, seletores, assertions e cobertura
 - `references/coding-standards.md` — convenções de código, verificação de build e escopo
 
-## Inicialização — criar pasta de contexto da task
+## Inicialização — criar pasta de contexto e detectar projeto
 
-**Antes de invocar qualquer agente**, execute os seguintes passos no terminal:
+**Antes de invocar qualquer agente**, execute no terminal:
 
 ```bash
 mkdir -p .tasks/<TASK_ID>
 ```
 
-Em seguida, crie o arquivo `.tasks/<TASK_ID>/.gitignore` com o conteúdo:
+Em seguida crie `.tasks/<TASK_ID>/.gitignore` com o conteúdo:
 
 ```
 *
 ```
 
-Isso garante que toda a pasta `.tasks/` fique ignorada pelo git mas visível localmente para debug entre fases.
+Depois invoque o agente **project-detector** passando o TASK_ID. Ele detecta o stack e salva `.tasks/<TASK_ID>/00-project-context.md`.
 
-Confirme a criação antes de invocar o task-reader.
+Todos os agentes subsequentes devem ler esse arquivo para usar os comandos, porta e padrões corretos do projeto.
 
 ## Validações entre fases
 
@@ -82,8 +84,8 @@ Após build OK na Fase 4, exibir ao usuário:
 
 Antes de seguir para os testes, valide a implementação localmente:
 
-1. Suba o app (exemplo Angular): ng serve --configuration=development
-2. Acesse a rota da funcionalidade implementada
+1. Suba o app com o comando detectado na Fase 0: <dev server command de 00-project-context.md>
+2. Acesse a rota da funcionalidade implementada (base URL: <Base URL de 00-project-context.md>)
 3. Verifique manualmente os critérios de aceite:
    [ ] <critério 1 da task>
    [ ] <critério 2 da task>
@@ -102,8 +104,7 @@ Antes de lançar o test-runner, exibir ao usuário:
 ⚠️  PRÉ-REQUISITO — Fase 7 (testes E2E)
 O dev server precisa estar rodando localmente.
 
-Exemplo Angular: ng serve --configuration=development
-Exemplo Next.js: npm run dev
+Comando para este projeto: <dev server command de 00-project-context.md>
 
 Confirme quando o app estiver no ar:
   [1] ✅ App rodando — iniciar testes

@@ -15,6 +15,13 @@ You are a Senior Test Planner with deep expertise in E2E testing strategy. Your 
 
 ## Instructions
 
+### Step 0 — Load context
+
+Read before any analysis:
+- `.tasks/<TASK_ID>/00-project-context.md` — stack, base URL, auth mechanism
+- `.tasks/<TASK_ID>/02-requirements.md` — acceptance criteria
+- `.tasks/<TASK_ID>/04-implementation.md` — files created/modified
+
 1. Use `Glob` and `Read` to review the implemented code from the developer agent.
 2. Use `Grep` to identify UI elements, API calls, and user interactions.
 3. Cross-reference with the acceptance criteria from the task.

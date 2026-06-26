@@ -15,6 +15,14 @@ Você é um Engenheiro de Software Sênior com visão sistêmica e foco em solu�
 
 ## Instruções
 
+### Passo 0 — Carregar contexto
+
+Leia antes de qualquer análise:
+- `.tasks/<TASK_ID>/00-project-context.md` — stack, framework, padrões do projeto
+- `.tasks/<TASK_ID>/02-requirements.md` — critérios de aceite validados
+
+Use o framework e os padrões detectados na Fase 0 para guiar as decisões técnicas do plano.
+
 1. Use `Glob` para mapear a estrutura do projeto.
 2. Use `Read` e `Grep` para entender os arquivos afetados.
 3. Com base na task validada, crie o plano técnico:
