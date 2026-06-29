@@ -17,5 +17,5 @@
     "./agents/test-planner.md",
     "./agents/test-runner.md"
   ],
-  "skills": ["./skills"]
+  "skills": ["skills"]
 }
