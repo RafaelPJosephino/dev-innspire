@@ -16,6 +16,5 @@
     "./agents/test-analyst.md",
     "./agents/test-planner.md",
     "./agents/test-runner.md"
-  ],
-  "skills": ["skills"]
+  ]
 }
