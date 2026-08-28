@@ -1,21 +1,26 @@
 {
   "name": "dev-innspire",
-  "version": "3.0.0",
-  "description": "Automated development workflow for ClickUp tasks — reads task, plans, codes, tests and documents.",
+  "version": "3.1.0",
+  "description": "Automated development workflow for ClickUp tasks - reads task, plans, codes, tests and documents. Includes an autonomous mode with deterministic gates and resumable state.",
   "author": {
     "name": "Innspire",
     "email": "rafael.puckoski@innspire.dev"
   },
   "context": "./CLAUDE.md",
   "agents": [
+    "./agents/context-collector.md",
     "./agents/developer.md",
     "./agents/documentation-analyst.md",
+    "./agents/project-detector.md",
     "./agents/requirements-analyst.md",
+    "./agents/reviewer.md",
     "./agents/software-engineer.md",
     "./agents/task-reader.md",
     "./agents/test-analyst.md",
     "./agents/test-planner.md",
     "./agents/test-runner.md"
   ],
-  "skills": ["skills"]
+  "skills": [
+    "skills"
+  ]
 }
