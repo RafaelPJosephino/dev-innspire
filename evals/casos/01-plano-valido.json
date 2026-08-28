@@ -1,0 +1,21 @@
+{
+  "nome": "plano bem-formado aprova",
+  "tipo": "plano",
+  "proveniencia": "sintetico",
+  "tipo_tarefa": "bug-fix",
+  "repo_arquivos": ["app/services/pdf.service.ts"],
+  "plano": {
+    "schema": 1,
+    "tipo_tarefa": "bug-fix",
+    "contexto": "O relatorio PDF sai vazio quando nao ha vistorias no periodo informado.",
+    "etapas": [{
+      "titulo": "Tratar colecao vazia",
+      "o_que_fazer": "Verificar vistorias.length antes de montar o documento e devolver pagina unica.",
+      "arquivos": [{ "caminho": "app/services/pdf.service.ts", "acao": "modificar" }],
+      "criterio_conclusao": "generate() com lista vazia devolve PDF de 1 pagina."
+    }],
+    "duvidas_em_aberto": [],
+    "caracterizacao_afetada": []
+  },
+  "esperado": { "aprovado": true, "checks_falhos": [] }
+}

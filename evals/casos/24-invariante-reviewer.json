@@ -1,0 +1,8 @@
+{
+  "nome": "revisor nunca ve texto da task nem comentarios (invariante)",
+  "tipo": "invariante",
+  "proveniencia": "sintetico",
+  "fases": ["8"],
+  "artefato_proibido": "01-task-data.md",
+  "esperado": { "violacoes": [] }
+}

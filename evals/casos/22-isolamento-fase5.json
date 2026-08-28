@@ -1,0 +1,11 @@
+{
+  "nome": "fase 5 (test-analyst) nao ve o plano tecnico",
+  "tipo": "isolamento",
+  "proveniencia": "sintetico",
+  "fase": "5",
+  "esperado": {
+    "ve": ["00-project-context.md", "01-task-data.md", "05-test-plan.md"],
+    "nao_ve": ["03-technical-plan.json"],
+    "vazou_segredo": false
+  }
+}

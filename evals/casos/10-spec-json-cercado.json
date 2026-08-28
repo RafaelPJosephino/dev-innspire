@@ -1,0 +1,7 @@
+{
+  "nome": "extrai JSON cercado em markdown",
+  "tipo": "spec",
+  "proveniencia": "sintetico",
+  "entrada": "Segue o plano:\n```json\n{\"schema\":1,\"contexto\":\"Corrigir o relatorio PDF que sai vazio sem vistorias.\",\"etapas\":[{\"titulo\":\"Ajustar\",\"o_que_fazer\":\"Verificar a colecao antes de montar o documento.\",\"arquivos\":[{\"caminho\":\"a.ts\",\"acao\":\"modificar\"}],\"criterio_conclusao\":\"Devolve 1 pagina.\"}],\"duvidas_em_aberto\":[],\"caracterizacao_afetada\":[]}\n```",
+  "esperado": { "extraiu": true, "valido": true }
+}

@@ -1,0 +1,8 @@
+{
+  "nome": "deixa seguir quando ha progresso real",
+  "tipo": "no-progress",
+  "proveniencia": "sintetico",
+  "historico": [{ "erro": "falha A", "diff": "d1" }],
+  "atual": { "erro": "falha B", "diff": "d2" },
+  "esperado": { "parar": false }
+}

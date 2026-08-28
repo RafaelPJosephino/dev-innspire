@@ -1,0 +1,22 @@
+{
+  "nome": "caracterizacao inventada reprova",
+  "tipo": "plano",
+  "proveniencia": "sintetico",
+  "repo_arquivos": ["app/services/pdf.service.ts"],
+  "suite": ["PdfService > lanca quando o template falta"],
+  "plano": {
+    "schema": 1,
+    "contexto": "Corrigir o PDF vazio quando nao ha vistorias registradas no periodo.",
+    "etapas": [{
+      "titulo": "Tratar colecao vazia",
+      "o_que_fazer": "Verificar vistorias.length antes de montar o documento PDF.",
+      "arquivos": [{ "caminho": "app/services/pdf.service.ts", "acao": "modificar" }],
+      "criterio_conclusao": "Devolve PDF de 1 pagina."
+    }],
+    "duvidas_em_aberto": [],
+    "caracterizacao_afetada": [
+      { "teste": "TesteQueNaoExisteNaSuite", "por_que": "Trava o comportamento antigo do relatorio." }
+    ]
+  },
+  "esperado": { "aprovado": false, "checks_falhos": ["caracterizações declaradas existem"] }
+}

@@ -1,0 +1,11 @@
+{
+  "nome": "fase 4 (test-planner) nao ve o plano tecnico",
+  "tipo": "isolamento",
+  "proveniencia": "sintetico",
+  "fase": "4",
+  "esperado": {
+    "ve": ["00-project-context.md", "01-task-data.md"],
+    "nao_ve": ["03-technical-plan.json"],
+    "vazou_segredo": false
+  }
+}

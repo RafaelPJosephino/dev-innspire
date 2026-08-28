@@ -1,0 +1,8 @@
+{
+  "nome": "erro identico com timestamp diferente ainda e identico",
+  "tipo": "no-progress",
+  "proveniencia": "sintetico",
+  "historico": [{ "erro": "2026-01-01T00:00:00Z falhou em 12ms", "diff": "d1" }],
+  "atual": { "erro": "2026-06-06T11:11:11Z falhou em 99ms", "diff": "d1" },
+  "esperado": { "parar": true }
+}

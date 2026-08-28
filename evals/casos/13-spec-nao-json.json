@@ -1,0 +1,7 @@
+{
+  "nome": "prosa sem JSON reprova sem estourar",
+  "tipo": "spec",
+  "proveniencia": "sintetico",
+  "entrada": "Analisei o codigo e acho que o melhor caminho e ajustar o servico de PDF.",
+  "esperado": { "extraiu": false, "valido": false }
+}

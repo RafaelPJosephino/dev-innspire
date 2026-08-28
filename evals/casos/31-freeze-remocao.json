@@ -1,0 +1,8 @@
+{
+  "nome": "freeze detecta teste apagado",
+  "tipo": "freeze",
+  "proveniencia": "sintetico",
+  "specs_iniciais": { "CU-1.spec.ts": "test('x',()=>{expect(1).toBe(1)})\n" },
+  "acoes": [{ "tipo": "remover", "arquivo": "CU-1.spec.ts" }],
+  "esperado": { "n_violacoes": 1, "tipos": ["removido"] }
+}

@@ -1,0 +1,8 @@
+{
+  "nome": "freeze nao acusa quando nada mudou",
+  "tipo": "freeze",
+  "proveniencia": "sintetico",
+  "specs_iniciais": { "CU-1.spec.ts": "test('x',()=>{expect(1).toBe(1)})\n" },
+  "acoes": [],
+  "esperado": { "n_violacoes": 0 }
+}

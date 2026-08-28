@@ -1,0 +1,19 @@
+{
+  "nome": "duvida em aberto reprova",
+  "tipo": "plano",
+  "proveniencia": "sintetico",
+  "repo_arquivos": ["app/services/pdf.service.ts"],
+  "plano": {
+    "schema": 1,
+    "contexto": "O relatorio PDF sai vazio quando nao ha vistorias no periodo informado.",
+    "etapas": [{
+      "titulo": "Tratar colecao vazia",
+      "o_que_fazer": "Verificar vistorias.length antes de montar o documento.",
+      "arquivos": [{ "caminho": "app/services/pdf.service.ts", "acao": "modificar" }],
+      "criterio_conclusao": "Devolve PDF de 1 pagina."
+    }],
+    "duvidas_em_aberto": ["O endpoint deveria paginar o resultado?"],
+    "caracterizacao_afetada": []
+  },
+  "esperado": { "aprovado": false, "checks_falhos": ["sem dúvidas em aberto"] }
+}

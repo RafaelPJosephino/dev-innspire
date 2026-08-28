@@ -1,0 +1,11 @@
+{
+  "nome": "fase 8 (reviewer) nao ve o texto da task",
+  "tipo": "isolamento",
+  "proveniencia": "sintetico",
+  "fase": "8",
+  "esperado": {
+    "ve": ["03-technical-plan.json", "04-implementation.md", "07-test-run.md"],
+    "nao_ve": ["01-task-data.md"],
+    "vazou_segredo": false
+  }
+}
