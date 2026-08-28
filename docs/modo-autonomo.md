@@ -11,6 +11,10 @@ Além disso, uma sessão interrompida hoje perde tudo — não há como retomar 
 ## O que foi adicionado
 
 ```
+bin/pipeline.mjs               CLI: run / status / doctor
+lib/autonomo/orquestrador.mjs  o loop que executa as fases
+lib/autonomo/isolamento.mjs    contexto por fase, imposto por diretório
+lib/autonomo/invocar.mjs       subagente em processo próprio, custo real
 lib/autonomo/manifest.mjs      estado durável, retomada, invalidação em cascata
 lib/autonomo/report.mjs        report.jsonl + report por tarefa
 lib/guards/test-freeze.mjs     congela os testes por hash SHA-256
@@ -19,8 +23,20 @@ lib/guards/no-progress.mjs     corta loop que não anda
 agents/context-collector.md    Fase 1b — extrai contexto do repo
 agents/reviewer.md             Fase 8 — revisão adversarial isolada
 scripts/wait-for-app.sh        health check do dev server
-skills/executar-tarefa-autonoma/  orquestração
+skills/executar-tarefa-autonoma/  a mesma orquestração, guiada por skill
 ```
+
+## Como roda
+
+```bash
+node bin/pipeline.mjs doctor           # verifica CLI e imprime o isolamento por fase
+node bin/pipeline.mjs run    CU-123    # inicia ou retoma
+node bin/pipeline.mjs status CU-123    # onde parou
+```
+
+Cada fase roda em **processo próprio** (`claude -p`), num **diretório isolado**, e devolve custo real para o `report.jsonl`. O orquestrador é quem grava o manifesto — nunca o subagente.
+
+Se o CLI não estiver no PATH (comum sob IDE, serviço ou cron), defina `CLAUDE_BIN`.
 
 Nada do fluxo assistido foi alterado. As duas portas usam o mesmo núcleo.
 
@@ -121,6 +137,10 @@ Este é o erro mais provável de uma implementação apressada de resume, e o mo
 
 Cada fase recebe **apenas** os arquivos que precisa. Isso é economia de token, mas antes disso é o gate.
 
+O contrato vive em `lib/autonomo/isolamento.mjs` e é **imposto por sistema de arquivos**: antes de invocar, o orquestrador copia para um diretório limpo apenas os artefatos que aquela fase pode ler. O subagente não deixa de ler o que não deve porque foi instruído — ele não consegue, porque o arquivo não está lá.
+
+Cada fase reporta o que lhe foi **negado**, e essa lista vai para o `report.jsonl`. Sem ela, "o isolamento está ligado" seria só uma afirmação.
+
 ### Test Author sem o plano técnico (fases 4 e 5)
 
 No modo assistido, `planejar-teste-task` lê `03-technical-plan.md`. No autônomo, **não**: lê só o critério de aceite.
@@ -209,9 +229,9 @@ Esta entrega cobre gates, estado e isolamento. Falta, conforme o cronograma do p
 - Camada unitária + Stryker (o gate de mutation score depende dela)
 - Skill `/caracterizar` — pipeline v0
 - Roteamento de repositório e worktree
-- Daemon, claim, lease, circuit breaker
+- Daemon, claim, lease, circuit breaker (o orquestrador executa **uma** task; falta o que decide *qual*)
 - Sandbox
-- `pr.ts` — publicação
+- Publicação do PR — a Fase 10 aceita um publicador via `opcoes.publicar`; sem ele, gera o report e para, nunca inventa um PR
 
 **Ordem recomendada:** medir a Fase 0 contra 20 tarefas reais antes de construir qualquer coisa. Se mais de 60% reprovar, o gargalo são as tarefas, não o pipeline — e construir o resto produz um pipeline caro esperando entrada que nunca chega.
 
