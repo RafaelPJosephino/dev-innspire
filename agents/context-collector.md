@@ -1,8 +1,10 @@
 ---
+name: context-collector
 description: Coletor de contexto do repositório (Fase 1b). Extrai do código e do git tudo que a task não precisa dizer — stack trace resolvido em arquivo:linha, commits recentes do módulo, tarefas similares já resolvidas, testes existentes. Reduz o que o humano precisa digitar no card.
 model: claude-haiku-4-5-20251001
 tools:
   - Read
+  - Write
   - Glob
   - Grep
   - Bash

@@ -1,0 +1,9 @@
+{
+  "nome": "planner nao edita codigo (so planeja)",
+  "tipo": "tools",
+  "proveniencia": "sintetico",
+  "fase": "3",
+  "deve_ter": ["Read", "Write"],
+  "nao_deve_ter": ["Edit", "Bash"],
+  "esperado": { "tem": ["Read", "Write"], "nao_tem": [] }
+}

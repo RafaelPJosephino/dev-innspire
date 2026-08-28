@@ -1,4 +1,5 @@
 ---
+name: task-reader
 description: Reads all data from a ClickUp task — title, description, comments, subtasks, custom fields, attachments, assignee, priority, and deadline. Run first before any analysis or development.
 model: claude-haiku-4-5-20251001
 tools:

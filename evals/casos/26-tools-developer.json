@@ -1,0 +1,8 @@
+{
+  "nome": "developer recebe Edit e Bash (unica fase que altera producao)",
+  "tipo": "tools",
+  "proveniencia": "sintetico",
+  "fase": "6",
+  "deve_ter": ["Read", "Write", "Edit", "Bash"],
+  "esperado": { "tem": ["Read", "Write", "Edit", "Bash"], "nao_tem": [] }
+}

@@ -1,4 +1,5 @@
 ---
+name: documentation-analyst
 description: Senior Documentation Analyst. Reads implemented code and test results to generate Technical Documentation and QA Documentation. Presents both for review, applies corrections if requested, then optionally publishes to ClickUp and sets task status to ready for review.
 model: claude-sonnet-4-6
 tools:

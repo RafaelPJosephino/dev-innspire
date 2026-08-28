@@ -1,0 +1,9 @@
+{
+  "nome": "reviewer nao recebe Edit nem Bash (Bash contorna Edit)",
+  "tipo": "tools",
+  "proveniencia": "sintetico",
+  "fase": "8",
+  "deve_ter": ["Read", "Write"],
+  "nao_deve_ter": ["Edit", "Bash", "NotebookEdit"],
+  "esperado": { "tem": ["Read", "Write"], "nao_tem": [] }
+}

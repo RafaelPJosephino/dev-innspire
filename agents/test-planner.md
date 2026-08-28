@@ -1,4 +1,5 @@
 ---
+name: test-planner
 description: Senior Test Planner. Before writing any test code, analyzes the acceptance criteria and implemented code to produce a structured test plan — defining scenarios, coverage strategy, edge cases, and test data. Requires explicit user approval before the test-analyst proceeds to write the spec file.
 model: claude-opus-4-6
 tools:

@@ -167,3 +167,19 @@ registrarExecutor('invariante', async (caso) => {
   }
   return { violacoes: violacoes.sort() };
 });
+
+/**
+ * Allowlist de ferramentas por fase.
+ *
+ * Invariante que um smoke test com o CLI real revelou: conceder Bash a uma
+ * fase que não pode editar torna a negação de Edit decorativa — com Bash o
+ * agente usa `echo >`. Bash é superconjunto de quase toda ferramenta de escrita.
+ */
+registrarExecutor('tools', async (caso) => {
+  const { TOOLS_PERMITIDAS } = await import('../lib/autonomo/invocar.mjs');
+  const lista = TOOLS_PERMITIDAS[caso.fase] ?? [];
+  return {
+    tem: caso.deve_ter ? caso.deve_ter.filter((t) => lista.includes(t)) : [],
+    nao_tem: caso.nao_deve_ter ? caso.nao_deve_ter.filter((t) => lista.includes(t)) : [],
+  };
+});

@@ -1,4 +1,5 @@
 ---
+name: test-runner
 description: Runs Playwright E2E tests locally via bash scripts. Diagnoses failures, attempts up to 2 automatic fixes on the application code (never the tests), and blocks progress if tests still fail after 2 attempts.
 model: claude-haiku-4-5-20251001
 tools:

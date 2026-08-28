@@ -1,4 +1,5 @@
 ---
+name: project-detector
 description: Project Detector. Runs before any other agent — checks if .tasks/_project-context.md already exists (project-level cache). If it does, reuses it. If not, detects the stack and saves to both .tasks/_project-context.md (cache) and .tasks/<TASK_ID>/00-project-context.md (task copy). Accepts --force flag to re-detect even if cache exists.
 model: claude-haiku-4-5-20251001
 tools:
