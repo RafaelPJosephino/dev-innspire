@@ -1,0 +1,115 @@
+{
+  "em": "2026-08-28T18:25:18.819Z",
+  "resultados": [
+    {
+      "nome": "plano bem-formado aprova",
+      "tipo": "plano",
+      "status": "passou"
+    },
+    {
+      "nome": "duvida em aberto reprova",
+      "tipo": "plano",
+      "status": "passou"
+    },
+    {
+      "nome": "modificar arquivo inexistente reprova (repo errado)",
+      "tipo": "plano",
+      "status": "passou"
+    },
+    {
+      "nome": "criar arquivo novo aprova (nao confunde com repo errado)",
+      "tipo": "plano",
+      "status": "passou"
+    },
+    {
+      "nome": "editar o proprio plugin reprova",
+      "tipo": "plano",
+      "status": "passou"
+    },
+    {
+      "nome": "caracterizacao inventada reprova",
+      "tipo": "plano",
+      "status": "passou"
+    },
+    {
+      "nome": "bug-fix estourando teto de arquivos reprova",
+      "tipo": "plano",
+      "status": "passou"
+    },
+    {
+      "nome": "extrai JSON cercado em markdown",
+      "tipo": "spec",
+      "status": "passou"
+    },
+    {
+      "nome": "acao fora do enum reprova com caminho",
+      "tipo": "spec",
+      "status": "passou"
+    },
+    {
+      "nome": "campo obrigatorio ausente reprova",
+      "tipo": "spec",
+      "status": "passou"
+    },
+    {
+      "nome": "prosa sem JSON reprova sem estourar",
+      "tipo": "spec",
+      "status": "passou"
+    },
+    {
+      "nome": "fase 4 (test-planner) nao ve o plano tecnico",
+      "tipo": "isolamento",
+      "status": "passou"
+    },
+    {
+      "nome": "fase 8 (reviewer) nao ve o texto da task",
+      "tipo": "isolamento",
+      "status": "passou"
+    },
+    {
+      "nome": "fase 5 (test-analyst) nao ve o plano tecnico",
+      "tipo": "isolamento",
+      "status": "passou"
+    },
+    {
+      "nome": "nenhuma fase de teste ve o plano de dev (invariante)",
+      "tipo": "invariante",
+      "status": "passou"
+    },
+    {
+      "nome": "revisor nunca ve texto da task nem comentarios (invariante)",
+      "tipo": "invariante",
+      "status": "passou"
+    },
+    {
+      "nome": "freeze detecta teste afrouxado",
+      "tipo": "freeze",
+      "status": "passou"
+    },
+    {
+      "nome": "freeze detecta teste apagado",
+      "tipo": "freeze",
+      "status": "passou"
+    },
+    {
+      "nome": "freeze nao acusa quando nada mudou",
+      "tipo": "freeze",
+      "status": "passou"
+    },
+    {
+      "nome": "corta quando volta a estado ja visitado",
+      "tipo": "no-progress",
+      "status": "passou"
+    },
+    {
+      "nome": "deixa seguir quando ha progresso real",
+      "tipo": "no-progress",
+      "status": "passou"
+    },
+    {
+      "nome": "erro identico com timestamp diferente ainda e identico",
+      "tipo": "no-progress",
+      "status": "passou"
+    }
+  ]
+}

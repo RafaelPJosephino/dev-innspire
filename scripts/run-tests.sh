@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 # Uso: bash scripts/run-tests.sh CU-86abc1234
-set -e
+#
+# Nota: NÃO usar `set -e` aqui. Com ele, um teste que falha aborta o script
+# na própria linha do `npx playwright test`, antes de `EXIT=$?` — o diagnóstico
+# e o caminho do relatório nunca chegam a ser impressos, que é exatamente a
+# informação de que a fase de correção precisa.
+set -uo pipefail
 
 TASK_ID="${1:?Uso: bash scripts/run-tests.sh CU-<TASK_ID>}"
 SPEC="tests/e2e/${TASK_ID}.spec.ts"
@@ -20,10 +25,13 @@ npx playwright test "$SPEC" \
   --reporter=list \
   --output="playwright-report/${TASK_ID}" \
   --timeout=30000
-
 EXIT=$?
 
 echo ""
-[ $EXIT -eq 0 ] && echo "✅ Testes passaram." || echo "❌ Testes falharam. Relatório: playwright-report/${TASK_ID}"
+if [ $EXIT -eq 0 ]; then
+  echo "✅ Testes passaram."
+else
+  echo "❌ Testes falharam (exit $EXIT). Relatório: playwright-report/${TASK_ID}"
+fi
 
 exit $EXIT

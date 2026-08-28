@@ -1,0 +1,8 @@
+{
+  "nome": "corta quando volta a estado ja visitado",
+  "tipo": "no-progress",
+  "proveniencia": "sintetico",
+  "historico": [{ "erro": "falha A", "diff": "d1" }, { "erro": "falha B", "diff": "d2" }],
+  "atual": { "erro": "falha C", "diff": "d1" },
+  "esperado": { "parar": true, "tem_motivo": true }
+}

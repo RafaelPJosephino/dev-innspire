@@ -1,0 +1,17 @@
+{
+  "nome": "campo obrigatorio ausente reprova",
+  "tipo": "spec",
+  "proveniencia": "sintetico",
+  "entrada": {
+    "schema": 1,
+    "contexto": "Corrigir o relatorio PDF que sai vazio quando nao ha vistorias.",
+    "etapas": [{
+      "titulo": "Ajustar",
+      "o_que_fazer": "Verificar a colecao antes de montar o documento.",
+      "arquivos": [{ "caminho": "a.ts", "acao": "modificar" }],
+      "criterio_conclusao": "Devolve 1 pagina."
+    }],
+    "caracterizacao_afetada": []
+  },
+  "esperado": { "valido": false, "campos_com_erro": ["$.duvidas_em_aberto"] }
+}

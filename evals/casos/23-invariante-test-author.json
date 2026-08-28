@@ -1,0 +1,8 @@
+{
+  "nome": "nenhuma fase de teste ve o plano de dev (invariante)",
+  "tipo": "invariante",
+  "proveniencia": "sintetico",
+  "fases": ["4", "5"],
+  "artefato_proibido": "03-technical-plan.json",
+  "esperado": { "violacoes": [] }
+}

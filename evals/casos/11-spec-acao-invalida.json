@@ -1,0 +1,18 @@
+{
+  "nome": "acao fora do enum reprova com caminho",
+  "tipo": "spec",
+  "proveniencia": "sintetico",
+  "entrada": {
+    "schema": 1,
+    "contexto": "Corrigir o relatorio PDF que sai vazio quando nao ha vistorias.",
+    "etapas": [{
+      "titulo": "Ajustar",
+      "o_que_fazer": "Verificar a colecao antes de montar o documento.",
+      "arquivos": [{ "caminho": "a.ts", "acao": "editar" }],
+      "criterio_conclusao": "Devolve 1 pagina."
+    }],
+    "duvidas_em_aberto": [],
+    "caracterizacao_afetada": []
+  },
+  "esperado": { "valido": false, "campos_com_erro": ["$.etapas[0].arquivos[0].acao"] }
+}

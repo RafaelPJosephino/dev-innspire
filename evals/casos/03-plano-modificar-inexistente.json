@@ -1,0 +1,19 @@
+{
+  "nome": "modificar arquivo inexistente reprova (repo errado)",
+  "tipo": "plano",
+  "proveniencia": "sintetico",
+  "repo_arquivos": [],
+  "plano": {
+    "schema": 1,
+    "contexto": "Ajustar o servico de PDF que gera relatorio vazio para apiarios.",
+    "etapas": [{
+      "titulo": "Corrigir servico",
+      "o_que_fazer": "Alterar a montagem do documento no servico de PDF existente.",
+      "arquivos": [{ "caminho": "app/services/pdf.service.ts", "acao": "modificar" }],
+      "criterio_conclusao": "Servico devolve PDF valido."
+    }],
+    "duvidas_em_aberto": [],
+    "caracterizacao_afetada": []
+  },
+  "esperado": { "aprovado": false, "checks_falhos": ["arquivos a modificar existem"] }
+}

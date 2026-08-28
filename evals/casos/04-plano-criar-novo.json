@@ -1,0 +1,20 @@
+{
+  "nome": "criar arquivo novo aprova (nao confunde com repo errado)",
+  "tipo": "plano",
+  "proveniencia": "sintetico",
+  "tipo_tarefa": "feature",
+  "repo_arquivos": [],
+  "plano": {
+    "schema": 1,
+    "contexto": "Adicionar um novo exportador CSV para o relatorio de apiarios.",
+    "etapas": [{
+      "titulo": "Criar exportador CSV",
+      "o_que_fazer": "Novo servico que recebe as vistorias e serializa em CSV com cabecalho.",
+      "arquivos": [{ "caminho": "app/services/csv-export.service.ts", "acao": "criar" }],
+      "criterio_conclusao": "Exportador devolve CSV com uma linha por vistoria."
+    }],
+    "duvidas_em_aberto": [],
+    "caracterizacao_afetada": []
+  },
+  "esperado": { "aprovado": true, "checks_falhos": [] }
+}

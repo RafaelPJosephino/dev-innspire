@@ -1,0 +1,8 @@
+{
+  "nome": "freeze detecta teste afrouxado",
+  "tipo": "freeze",
+  "proveniencia": "sintetico",
+  "specs_iniciais": { "CU-1.spec.ts": "test('x',()=>{expect(1).toBe(1)})\n" },
+  "acoes": [{ "tipo": "alterar", "arquivo": "CU-1.spec.ts", "conteudo": "test.skip('x',()=>{})\n" }],
+  "esperado": { "n_violacoes": 1, "tipos": ["alterado"] }
+}

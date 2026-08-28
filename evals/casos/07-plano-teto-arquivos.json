@@ -1,0 +1,24 @@
+{
+  "nome": "bug-fix estourando teto de arquivos reprova",
+  "tipo": "plano",
+  "proveniencia": "sintetico",
+  "tipo_tarefa": "bug-fix",
+  "repo_arquivos": ["a1.ts","a2.ts","a3.ts","a4.ts","a5.ts","a6.ts"],
+  "plano": {
+    "schema": 1,
+    "contexto": "Correcao pontual que acabou tocando o modulo inteiro de relatorios.",
+    "etapas": [{
+      "titulo": "Ajustar tudo",
+      "o_que_fazer": "Alterar os seis arquivos do modulo para uniformizar o retorno.",
+      "arquivos": [
+        { "caminho": "a1.ts", "acao": "modificar" }, { "caminho": "a2.ts", "acao": "modificar" },
+        { "caminho": "a3.ts", "acao": "modificar" }, { "caminho": "a4.ts", "acao": "modificar" },
+        { "caminho": "a5.ts", "acao": "modificar" }, { "caminho": "a6.ts", "acao": "modificar" }
+      ],
+      "criterio_conclusao": "Todos devolvem o mesmo formato."
+    }],
+    "duvidas_em_aberto": [],
+    "caracterizacao_afetada": []
+  },
+  "esperado": { "aprovado": false, "checks_falhos": ["≤ 5 arquivos (bug-fix)"] }
+}
